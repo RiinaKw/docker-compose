@@ -59,7 +59,7 @@ class Route
     {
         // ホスト名には docker-compose.yml で定義したコンテナ名が使用できる
         // docker-compose に書いた「13306」ポートは外向きのものなので、コンテナ内部では利用できない
-        $pdo = new PDO('mysql:dbname=db_docker_example;host=example_mysql;port=3306', 'user_example', 'any_password');
+        $pdo = new PDO('mysql:dbname=db_example;host=container_mysql;port=3306', 'user_example', 'any_password');
         $statement = $pdo->query('SHOW DATABASES;');
 
         foreach ($statement as $row) {

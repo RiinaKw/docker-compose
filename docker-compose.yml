@@ -1,40 +1,41 @@
 version: "3"
 
 services:
-    data:
-        container_name: example_data
+    service_data:
+        container_name: container_data
         image: busybox
         volumes:
             - ./project:/project
 
-    web:
-        # locaolhost:12000 で PHP が動く web サーバ
-        container_name: example_web
+    # locaolhost:12000 で PHP が動くウェブサーバ
+    service_web:
+        container_name: container_web
         build: ./web
         volumes_from:
-            - data  # コンテナ名ではなくサービス名であることに注意
+            - service_data
         ports:
             - 12000:80
         depends_on:
-            - mysql  # mysql コンテナが起動してから自身を起動させる
+            - service_mysql  # mysql コンテナが起動してから自身を起動させる
 
-    # "docker-compose run --rm composer" と打つとこのコンテナが呼ばれる
-    # "composer install" のほか、composer.json で定義した phpcs なども呼べる
-    composer:
-        container_name: example_composer
+    # "docker-compose run --rm service_composer" と打つとこのコンテナが呼ばれる
+    # "service_composer install" のほか、composer.json で定義した phpcs なども呼べる
+    service_composer:
+        container_name: container_composer
         build: ./composer
         volumes_from:
-            - data
+            - service_data
 
-    mysql:
-        container_name: example_mysql
+    # locaolhost:13306 で MariaDB が動くデータベースサーバ
+    service_mysql:
+        container_name: container_mysql
         image: mariadb:latest
         restart: on-failure
-        env_file: ./.env  # アプリケーションと関係ない root のパスワードなどはこのファイルに追い出しておく
+        env_file: ./mysql/.env  # アプリケーションと関係ない root のパスワードなどはこのファイルに追い出しておく
         volumes:
             - ./project/db_data:/var/lib/mysql
         environment:
-            MYSQL_DATABASE: db_docker_example
+            MYSQL_DATABASE: db_example
             MYSQL_USER: user_example
             MYSQL_PASSWORD: any_password
         ports:

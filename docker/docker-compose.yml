@@ -10,7 +10,10 @@ services:
     # locaolhost:12000 で PHP が動くウェブサーバ
     service_web:
         container_name: container_web
-        build: ./web
+        build:
+            context: ./web
+            args:
+                PHP_VER: $PHP_VER
         volumes_from:
             - service_data
         ports:
@@ -21,7 +24,10 @@ services:
     # "docker-compose run --rm service_cli" と打つと独自のコマンドスクリプトが動く
     service_cli:
         container_name: container_cli
-        build: ./cli
+        build:
+            context: ./cli
+            args:
+                PHP_VER: $PHP_VER
         volumes_from:
             - service_data
         entrypoint:
@@ -37,7 +43,10 @@ services:
     # "service_composer install" のほか、composer.json で定義した phpcs なども呼べる
     service_composer:
         container_name: container_composer
-        build: ./composer
+        build:
+            context: ./composer
+            args:
+                PHP_VER: $PHP_VER
         volumes_from:
             - service_data
         depends_on:

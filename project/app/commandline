@@ -6,7 +6,7 @@ require_once('./vendor/autoload.php');
 array_shift($argv);
 $str = implode(', ', $argv);
 if (in_array('-v', $argv, true)) {
-    $output = "My version is ... already you know.";
+    $output = "My version is " . phpversion();
 } else {
     $output = "You said '$str'";
 }

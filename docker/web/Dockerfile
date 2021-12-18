@@ -1,4 +1,6 @@
-FROM php:8.1-apache
+ARG PHP_VER
+
+FROM php:${PHP_VER}-apache
 
 # プロジェクトディレクトリをマウント
 VOLUME ["/project"]

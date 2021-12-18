@@ -1,0 +1,14 @@
+#!/usr/bin/env php
+<?php
+
+require_once('./vendor/autoload.php');
+
+array_shift($argv);
+$str = implode(', ', $argv);
+if (in_array('-v', $argv, true)) {
+    echo "\n";
+    echo "My version is ... already you know.\n\n";
+} else {
+    echo "\n";
+    echo "You said '$str'\n\n";
+}

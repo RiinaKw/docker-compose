@@ -18,6 +18,19 @@ services:
         depends_on:
             - service_mysql  # mysql コンテナが起動してから自身を起動させる
 
+    # "docker-compose run --rm service_cli" と打つと独自のコマンドスクリプトが動く
+    service_cli:
+        container_name: container_cli
+        build: ./cli
+        volumes_from:
+            - service_data
+        entrypoint:
+            # コンテナに対して docker run されたら php commandline を起動する
+            - php
+            - commandline
+        depends_on:
+            - service_mysql  # mysql コンテナが起動してから自身を起動させる
+
     # "docker-compose run --rm service_composer" と打つとこのコンテナが呼ばれる
     # "service_composer install" のほか、composer.json で定義した phpcs なども呼べる
     service_composer:

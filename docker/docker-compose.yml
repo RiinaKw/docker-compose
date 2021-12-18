@@ -60,9 +60,9 @@ services:
         container_name: container_mysql
         image: mariadb:latest
         restart: on-failure
-        env_file: ./mysql/.env  # アプリケーションと関係ない root のパスワードなどはこのファイルに追い出しておく
         volumes:
             - ./mysql/db_data:/var/lib/mysql  # 他のコンテ内には不要なので、ここにしかマウントしない
+        env_file: ./mysql/.env  # アプリケーションと関係ない root のパスワードなどはこのファイルに追い出しておく
         environment:
             MYSQL_DATABASE: db_example
             MYSQL_USER: user_example

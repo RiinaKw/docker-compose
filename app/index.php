@@ -9,6 +9,7 @@ switch ($path) {
         break;
 
     case '/phpinfo':
+        // 「index.php」って書かなくても http://localhost:12000/phpinfo っていう URL でアクセスできるよ！
         phpinfo();
         break;
 

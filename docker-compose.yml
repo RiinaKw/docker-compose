@@ -3,7 +3,7 @@ version: "3"
 services:
     web:
         # locaolhost:12000 で PHP が動く web サーバ
-        image: php:8.1-apache
+        build: ./web
         container_name: example_web
         volumes:
             # 公開ディレクトリをマウント

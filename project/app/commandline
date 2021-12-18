@@ -13,7 +13,21 @@ if (in_array('-v', $argv, true)) {
 
 echo "\n", $output, "\n\n";
 
-$fp = fopen('../logs/commandline/executed.log', 'ab');
-$date = date('Y-m-d H:i:s');
-fwrite($fp, "{$date} : {$output}\n");
-fclose($fp);
+// 環境変数によってログの出力先を決定
+// ディレクトリのマウント状況と環境変数の値次第で、app の外に出力することも可能
+$log_dir = $_SERVER['LOG_DIR'] ?? '.';
+$log_file = 'executed.log';
+$log_path = $log_dir . '/' . $log_file;
+if (! file_exists($log_dir)) {
+    mkdir($log_dir);
+} elseif (! is_dir($log_dir)) {
+    // ディレクトリではない何かが存在するので、ログ出力は行なわない
+    $log_path = '';
+}
+
+if ($log_path) {
+    $fp = fopen($log_path, 'ab');
+    $date = date('Y-m-d H:i:s');
+    fwrite($fp, "{$date} : {$output}\n");
+    fclose($fp);
+}

@@ -28,6 +28,8 @@ services:
             # コンテナに対して docker run されたら php commandline を起動する
             - php
             - commandline
+        environment:
+            - LOG_DIR=../logs/commandline  # commandline で利用できる環境変数を設定（今回は実行ログの出力先）
         depends_on:
             - service_mysql  # mysql コンテナが起動してから自身を起動させる
 

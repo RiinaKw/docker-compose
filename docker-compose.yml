@@ -10,9 +10,5 @@ services:
             - ./app:/var/www/public
             # ログディレクトリをマウント
             - ./logs:/var/www/logs
-            # Apache の設定を反映
-            - ./conf/apache-vhosts.conf:/etc/apache2/sites-available/000-default.conf
-            # PHP の設定を反映
-            - ./conf/php.ini:/usr/local/etc/php/php.ini
         ports:
             - 12000:80

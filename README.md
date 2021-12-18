@@ -10,35 +10,34 @@ Docker についての**個人的な学習の範疇**であることにご注意
 <div>
 
 ```
-/
   + /docker
-  | | /cli
-  | |  | # CLI コンテナの定義
-  | |  | Dockerfile
-  | |
-  | | /composer
-  | |  | # Composer コンテナの定義
-  | |  | Dockerfile
-  | |
-  | | /mysql
-  | |  | # MySQL コンテナは yml で直接イメージを指定しているので、関連ファイルを置いている
-  | |  | /db_data
-  | |  |  |  （データベース関連のファイル群）
-  | |  |
-  | |  | .env
-  | |
-  | | /web
-  | |  | # Composer コンテナの定義
-  | |  | /conf
-  | |  |  | # Apache の設定ファイル
-  | |  |  | apache-vhosts.conf
-  | |  |  | php.ini
-  | |  |
-  | |  | Dockerfile
-  | |
-  | | # Docker システム全体を司る中枢
-  | | .env
-  | | docker-compose.yml
+  |  | /apache
+  |  |  | # Apache コンテナの定義
+  |  |  | /conf
+  |  |  |  | # Apache の設定ファイル
+  |  |  |  | apache-vhosts.conf
+  |  |  |  | php.ini
+  |  |  |
+  |  |  | Dockerfile
+  |  |
+  |  | /cli
+  |  |  | # CLI コンテナの定義
+  |  |  | Dockerfile
+  |  |
+  |  | /composer
+  |  |  | # Composer コンテナの定義
+  |  |  | Dockerfile
+  |  |
+  |  | /mysql
+  |  |  | # MySQL コンテナは yml で直接イメージを指定しているので、関連ファイルを置いている
+  |  |  | /db_data
+  |  |  |  |  （データベース関連のファイル群）
+  |  |  |
+  |  |  | .env
+  |  |
+  |  | # Docker システム全体を司る中枢
+  |  | .env
+  |  | docker-compose.yml
   |
   + /project
      | /app
@@ -92,6 +91,7 @@ Docker についての**個人的な学習の範疇**であることにご注意
 * コンテナへのファイルのマウント方法
 * `docker-compose run` コマンドのためのエントリポイント
 * 環境変数の使い方、それによってシステムの挙動を変更すること
+* コンテナの依存関係と起動順
 
 ## 苦戦したこと
 

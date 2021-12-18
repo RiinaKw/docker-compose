@@ -5,13 +5,14 @@ services:
         container_name: container_data
         image: busybox
         volumes:
+            # プロジェクトディレクトリをまるごとマウント
             - ../project:/project
 
     # locaolhost:12000 で PHP が動くウェブサーバ
-    service_web:
-        container_name: container_web
+    service_apache:
+        container_name: container_apache
         build:
-            context: ./web
+            context: ./apache
             args:
                 # 環境変数によってビルドする PHP のバージョンを指定
                 PHP_VER: $PHP_VER
@@ -61,9 +62,11 @@ services:
         image: mariadb:latest
         restart: on-failure
         volumes:
+            # プロジェクト関連のファイルは DB には必要ないので、service_data はマウントしない
             - ./mysql/db_data:/var/lib/mysql  # 他のコンテ内には不要なので、ここにしかマウントしない
         env_file: ./mysql/.env  # アプリケーションと関係ない root のパスワードなどはこのファイルに追い出しておく
         environment:
+            # アプリケーションで使用する定数群
             MYSQL_DATABASE: db_example
             MYSQL_USER: user_example
             MYSQL_PASSWORD: any_password

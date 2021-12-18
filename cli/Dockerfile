@@ -2,6 +2,7 @@ FROM php:8.1-cli
 
 # プロジェクトディレクトリをマウント
 VOLUME ["/project"]
+WORKDIR /project/app
 
 # タイムゾーン設定
 RUN rm /etc/localtime \

@@ -5,7 +5,7 @@ services:
         container_name: container_data
         image: busybox
         volumes:
-            - ./project:/project
+            - ../project:/project
 
     # locaolhost:12000 で PHP が動くウェブサーバ
     service_web:

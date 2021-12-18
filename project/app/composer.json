@@ -1,0 +1,15 @@
+{
+    "name": "riina/docker-sample-app",
+    "autoload": {
+        "psr-4": {
+            "Riina\\SampleApp\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Riina K.",
+            "email": "dev.riinak.tv@gmail.com"
+        }
+    ],
+    "require": {}
+}

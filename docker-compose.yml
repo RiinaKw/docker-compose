@@ -33,7 +33,7 @@ services:
         restart: on-failure
         env_file: ./mysql/.env  # アプリケーションと関係ない root のパスワードなどはこのファイルに追い出しておく
         volumes:
-            - ./project/db_data:/var/lib/mysql
+            - ./mysql/db_data:/var/lib/mysql  # 他のコンテ内には不要なので、ここにしかマウントしない
         environment:
             MYSQL_DATABASE: db_example
             MYSQL_USER: user_example

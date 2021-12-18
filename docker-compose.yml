@@ -25,6 +25,8 @@ services:
         build: ./composer
         volumes_from:
             - service_data
+        depends_on:
+            - service_mysql  # mysql コンテナが起動してから自身を起動させる
 
     # locaolhost:13306 で MariaDB が動くデータベースサーバ
     service_mysql:

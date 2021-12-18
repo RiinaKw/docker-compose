@@ -13,6 +13,7 @@ services:
         build:
             context: ./web
             args:
+                # 環境変数によってビルドする PHP のバージョンを指定
                 PHP_VER: $PHP_VER
         volumes_from:
             - service_data
@@ -27,6 +28,7 @@ services:
         build:
             context: ./cli
             args:
+                # 環境変数によってビルドする PHP のバージョンを指定
                 PHP_VER: $PHP_VER
         volumes_from:
             - service_data
@@ -46,6 +48,7 @@ services:
         build:
             context: ./composer
             args:
+                # 環境変数によってビルドする PHP のバージョンを指定
                 PHP_VER: $PHP_VER
         volumes_from:
             - service_data

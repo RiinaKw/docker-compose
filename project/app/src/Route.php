@@ -2,7 +2,7 @@
 
 namespace Riina\SampleApp;
 
-use PDO;
+use Riina\SampleApp\DB;
 use Exception;
 
 /**
@@ -59,10 +59,11 @@ class Route
     {
         // ホスト名には docker-compose.yml で定義したコンテナ名が使用できる
         // docker-compose に書いた「13306」ポートは外向きのものなので、コンテナ内部では利用できない
-        $pdo = new PDO('mysql:dbname=db_example;host=container_mysql;port=3306', 'user_example', 'any_password');
-        $statement = $pdo->query('SHOW DATABASES;');
 
-        foreach ($statement as $row) {
+        $db = (new DB('container_mysql'))->use('db_example');
+        $pdo = $db->pdo('user_example', 'any_password');
+
+        foreach ($pdo->query('SHOW DATABASES;') as $row) {
             var_dump($row);
             echo "<br />\n";
         }

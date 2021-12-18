@@ -6,6 +6,8 @@ services:
         image: php:8.1-apache
         container_name: example_web
         volumes:
-            - ./app:/var/www/html
+            # Apache の conf を変えてみる
+            - ./app:/var/www/public
+            - ./conf/apache-vhosts.conf:/etc/apache2/sites-available/000-default.conf
         ports:
             - 12000:80

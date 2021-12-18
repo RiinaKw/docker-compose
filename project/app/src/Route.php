@@ -2,6 +2,7 @@
 
 namespace Riina\SampleApp;
 
+use PDO;
 use Exception;
 
 /**
@@ -48,6 +49,14 @@ class Route
     public function time(): void
     {
         echo date(DATE_RFC2822);
+    }
+
+    /**
+     * "/db" で呼ばれた場合、データベースへの接続を試みる
+     */
+    public function db(): void
+    {
+        new PDO('mysql:dbname=docker_example;host=127.0.0.1', 'user_example', 'any_password');
     }
 
     /**

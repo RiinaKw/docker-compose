@@ -15,11 +15,27 @@ services:
             - data  # コンテナ名ではなくサービス名であることに注意
         ports:
             - 12000:80
+        depends_on:
+            - mysql  # mysql コンテナが起動してから自身を起動させる
 
-    # docker-compose run --rm composer と打つとこのコンテナが呼ばれる
-    # composer install のほか、composer.json で定義した phpcs なども呼べる
+    # "docker-compose run --rm composer" と打つとこのコンテナが呼ばれる
+    # "composer install" のほか、composer.json で定義した phpcs なども呼べる
     composer:
-        build: ./composer
         container_name: example_composer
+        build: ./composer
         volumes_from:
             - data
+
+    mysql:
+        container_name: example_mysql
+        image: mariadb:latest
+        restart: on-failure
+        env_file: ./.env  # アプリケーションと関係ない root のパスワードなどはこのファイルに追い出しておく
+        volumes:
+            - ./project/db_data:/var/lib/mysql
+        environment:
+            MYSQL_DATABASE: db_docker_example
+            MYSQL_USER: user_example
+            MYSQL_PASSWORD: any_password
+        ports:
+            - 13306:3306  # "mysql -P 13306 -u root -p" と 13306 ポートを指定することで、外部から接続が可能

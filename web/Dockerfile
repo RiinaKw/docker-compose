@@ -1,5 +1,7 @@
 FROM php:8.1-apache
 
+VOLUME ["/project"]
+
 # timezone
 RUN rm /etc/localtime
 RUN ln -s /usr/share/zoneinfo/Asia/Tokyo /etc/localtime

@@ -31,8 +31,7 @@ class Route
      */
     public function index(): void
     {
-        echo "It works<br />\n";
-        echo "in the directory " . __DIR__;
+        echo $_SERVER['DOCUMENT_ROOT'], " ｼｬﾍﾞｯﾀｧｧｧ<br />\n";
     }
 
     /**
@@ -59,7 +58,6 @@ class Route
     {
         // ホスト名には docker-compose.yml で定義したコンテナ名が使用できる
         // docker-compose に書いた「13306」ポートは外向きのものなので、コンテナ内部では利用できない
-
         $db = (new DB('container_mysql'))->use('db_example');
         $pdo = $db->pdo('user_example', 'any_password');
 
@@ -70,12 +68,21 @@ class Route
     }
 
     /**
+     * "/coffee" で呼ばれた場合、コーヒーを淹れるのに失敗する
+     */
+    public function coffee(): void
+    {
+        header("HTTP/1.1 418 I'm a teapot");
+        echo "ティロ・フィナーレ！ 砲火後ティータイムね";
+    }
+
+    /**
      * "/error" で呼ばれた場合、エラーログで確認できるよう 500 エラーを発生させる
      */
     public function error(): void
     {
         header("HTTP/1.1 500 Internal Server Error");
-        trigger_error("Test error.", E_USER_ERROR);
+        trigger_error("なんか来たぞ、エラーだな。ログ読んだら？", E_USER_ERROR);
     }
 
     /**
@@ -85,6 +92,6 @@ class Route
     public function unknown(string $path): void
     {
         header("HTTP/1.1 404 Not Found");
-        throw new Exception("Unknown route '{$path}'");
+        throw new Exception("'{$path}'……？ 知らない子ですね");
     }
 }

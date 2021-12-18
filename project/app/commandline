@@ -6,9 +6,10 @@ require_once('./vendor/autoload.php');
 array_shift($argv);
 $str = implode(', ', $argv);
 if (in_array('-v', $argv, true)) {
-    $output = "My version is " . phpversion();
+    $version = phpversion();
+    $output = "私の戦闘力は {$version} です";
 } else {
-    $output = "You said '$str'";
+    $output = "'$str' 、これが私の祈り、私の願い。さあ叶えてよ、インキュベーター！";
 }
 
 echo "\n", $output, "\n\n";

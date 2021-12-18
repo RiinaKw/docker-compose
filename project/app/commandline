@@ -6,9 +6,14 @@ require_once('./vendor/autoload.php');
 array_shift($argv);
 $str = implode(', ', $argv);
 if (in_array('-v', $argv, true)) {
-    echo "\n";
-    echo "My version is ... already you know.\n\n";
+    $output = "My version is ... already you know.";
 } else {
-    echo "\n";
-    echo "You said '$str'\n\n";
+    $output = "You said '$str'";
 }
+
+echo "\n", $output, "\n\n";
+
+$fp = fopen('../logs/commandline/executed.log', 'ab');
+$date = date('Y-m-d H:i:s');
+fwrite($fp, "{$date} : {$output}\n");
+fclose($fp);

@@ -1,1 +1,4 @@
 vendor
+
+# 今回の主題ではない（PHP のバージョンを変えたりする）ので、.lock は不要
+composer.lock

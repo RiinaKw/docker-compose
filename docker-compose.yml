@@ -13,10 +13,13 @@ services:
         build: ./web
         volumes_from:
             - data  # コンテナ名ではなくサービス名であることに注意
-        #volumes:
-        #    # 公開ディレクトリをマウント
-        #    - ./app:/var/www/public
-        #    # ログディレクトリをマウント
-        #    - ./logs:/var/www/logs
         ports:
             - 12000:80
+
+    # docker-compose run --rm composer と打つとこのコンテナが呼ばれる
+    # composer install のほか、composer.json で定義した phpcs なども呼べる
+    composer:
+        build: ./composer
+        container_name: example_composer
+        volumes_from:
+            - data

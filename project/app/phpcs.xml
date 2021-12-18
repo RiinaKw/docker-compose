@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<ruleset name="Remix">
+    <description>PSR12 compliant rules and settings for Remix</description>
+
+    <arg name="extensions" value="php" />
+
+    <rule ref="PSR12" />
+
+    <!-- Color the output -->
+    <arg name="colors" />
+
+    <!-- Options  p:progress  s:Show the rule in which the error occurred -->
+    <arg value="ps" />
+
+    <exclude-pattern>/vendor/</exclude-pattern>
+</ruleset>
